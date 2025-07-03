@@ -17,35 +17,35 @@
 `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash`
 
 ## 5. Utworzenie klastra 
-`k3d cluster create cluster --agents 2`
+`k3d cluster create cluster --agents 2`<br><br>
 `kubectl config use-context k3d-cluster`
 
 ## 6. Utworzenie namespaces ingress-ngnix, minio, nginx
 `kubectl create namespace ingress-nginx`
-`kubectl create namespace minio`
-`kubectl create namespace nginx`
+`kubectl create namespace minio`<br><br>
+`kubectl create namespace nginx`<br><br>
 
 ## 7. Instalacja ingress-nginx, minio, nginx bitnami
-`helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`
+`helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`<br><br>
 `helm repo update`
 
 `helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx -f ingress-values.yaml`
 
-`helm repo add minio https://charts.min.io/`
-`helm repo update`
+`helm repo add minio https://charts.min.io/`<br><br>
+`helm repo update`<br><br>
 `helm install -n minio -f minio-values.yaml --generate-name minio/minio` 
 
-`helm repo add bitnami https://charts.bitnami.com/bitnami`
-`helm repo update`
-`kubectl apply -f cm-nginx.yaml -n nginx` 
+`helm repo add bitnami https://charts.bitnami.com/bitnami`<br><br>
+`helm repo update`<br><br>
+`kubectl apply -f cm-nginx.yaml -n nginx` <br><br>
 `helm install nginx bitnami/nginx -f nginx-values.yaml -n nginx`
 
 ## 8.Skopiowanie obrazów
-`mc alias set minio http://minio.local:8080 login haslo`
+`mc alias set minio http://minio.local:8080 login haslo`<br><br>
 `mc cp 1.jpg minio/galeria`
 
 ## 9. Dodanie hostów
-`sudo nano /etc/hosts`
+`sudo nano /etc/hosts`<br><br>
 `127.0.0.1 frontend.local minio.local console.minio.local`
 
 ## 10. Przekierowanie ingress loadbalancer
