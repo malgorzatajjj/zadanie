@@ -1,0 +1,57 @@
+mode: standalone
+
+image:
+  repository: quay.io/minio/minio
+  tag: RELEASE.2024-12-18T13-15-44Z
+  pullPolicy: IfNotPresent
+
+rootUser: xxx
+rootPassword: xxx
+
+replicas: 1
+
+persistence:
+  enabled: true
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+service:
+  type: ClusterIP
+  port: 9000
+
+consoleService:
+  type: ClusterIP
+  port: 9001
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  path: /
+  hosts:
+    - minio.local
+
+consoleIngress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  path: /
+  hosts:
+    - console.minio.local
+
+resources:
+  requests:
+    memory: 512Mi
+
+
+buckets:
+  - name: galeria
+    policy: download
+    purge: false
+
+users:
+  - accessKey: xxx
+    secretKey: xxx
+    policy: consoleAdmin

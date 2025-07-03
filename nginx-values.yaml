@@ -1,0 +1,26 @@
+extraVolumes:
+  - name: html
+    configMap:
+      name: nginx-index
+
+extraVolumeMounts:
+  - name: html
+    mountPath: /app/index.html
+    subPath: index.html
+    readOnly: true
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: frontend.local
+      paths:
+        - path: /
+          pathType: Prefix
+  hostname: frontend.local

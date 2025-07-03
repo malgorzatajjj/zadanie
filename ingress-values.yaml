@@ -1,0 +1,19 @@
+controller:
+  name: controller
+  publishService:
+    enabled: "true"
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: true
+  ingressClass: nginx
+  replicaCount: 1
+  service:
+    type: LoadBalancer
+  config:
+    enable-real-ip: "true"
+    use-forwarded-headers: "true"
+    proxy-body-size: "5m"
+
+defaultBackend:
+  enabled: true
