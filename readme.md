@@ -21,9 +21,9 @@
 `kubectl config use-context k3d-cluster`
 
 ## 6. Utworzenie namespaces ingress-ngnix, minio, nginx
-`kubectl create namespace ingress-nginx`
+`kubectl create namespace ingress-nginx`<br><br>
 `kubectl create namespace minio`<br><br>
-`kubectl create namespace nginx`<br><br>
+`kubectl create namespace nginx`
 
 ## 7. Instalacja ingress-nginx, minio, nginx bitnami
 `helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`<br><br>
@@ -40,7 +40,7 @@
 `kubectl apply -f cm-nginx.yaml -n nginx` <br><br>
 `helm install nginx bitnami/nginx -f nginx-values.yaml -n nginx`
 
-## 8.Skopiowanie obrazów
+## 8. Skopiowanie obrazów
 `mc alias set minio http://minio.local:8080 login haslo`<br><br>
 `mc cp 1.jpg minio/galeria`
 
